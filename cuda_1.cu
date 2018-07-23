@@ -23,7 +23,7 @@ void MatrixMultiplication(float *M,float *N,float *P,int Width){
      cudaMalloc((void **)&Pd,size);
      dim3 dimBlock(Width,Width);
      dim3 dimGrid(1,1);
-     MatrixMulKernel<<<dimGrid,dimBlock>>>(*Md,*Nd,*Pd,Width);
+     MatrixMulKernel<<<dimGrid,dimBlock>>>(Md,Nd,Pd,Width);
      cudaMemcpy(P,Pd,size,cudaMemcpyDeviceToHost);
      cudaFree(Md);
      cudaFree(Nd);
