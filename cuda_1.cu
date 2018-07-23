@@ -15,7 +15,7 @@ __global__ void MatrixMulKernel(float *Md,float *Nd,float *Pd,int Width){
 
 void MatrixMultiplication(float *M,float *N,float *P,int Width){
      int size=Width*Width*sizeof(float);
-     float* Md,*Nd,*Pd;
+     float *Md,*Nd,*Pd;
      cudaMalloc((void **)&Md,size);
      cudaMemcpy(Md,M,size,cudaMemcpyHostToDevice);
      cudaMalloc((void **)&Nd,size);
@@ -23,7 +23,7 @@ void MatrixMultiplication(float *M,float *N,float *P,int Width){
      cudaMalloc((void **)&Pd,size);
      dim3 dimBlock(Width,Width);
      dim3 dimGrid(1,1);
-     MatrixMulKernel<<dimGrid,dimBlock>>(*Md,*Nd,*Pd,Width);
+     MatrixMulKernel<<<dimGrid,dimBlock>>>(*Md,*Nd,*Pd,Width);
      cudaMemcpy(P,Pd,size,cudaMemcpyDeviceToHost);
      cudaFree(Md);
      cudaFree(Nd);
@@ -38,7 +38,7 @@ void MatrixMultiplication(float *M,float *N,float *P,int Width){
      cout << "P[3][3] = " << endl;
      for(int m=0;m<3;m++){
          for(int n=0;n<3;n++){
-             cout << P[m][n] << " ";ßß
+             cout << P[m][n] << " ";
          }
          cout << endl;
      }
