@@ -6,7 +6,7 @@ __global__ void MatrixMulKernel(float *Md,float *Nd,float *Pd,int Width){
     float Pvalue=0;
     for(int k=0;k<Width;k++){
         float Mdelement=Md[ty*Width+k];
-        float Ndelement=Nd[k*Width+ty];
+        float Ndelement=Nd[k*Width+tx];
         Pvalue+=Mdelement*Ndelement;
         
     }
